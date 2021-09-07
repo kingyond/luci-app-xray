@@ -1,7 +1,0 @@
-.DS_Store
-*.po~
-.idea
-node_modules
-output
-package
-*.log

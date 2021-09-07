@@ -1,3 +1,0 @@
-#!/bin/sh
-
-test -s "/etc/init.d/xray" && /etc/init.d/xray reload
