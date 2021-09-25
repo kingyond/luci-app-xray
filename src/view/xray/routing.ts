@@ -17,7 +17,7 @@ return L.view.extend<SectionItem[][]>({
       "xray",
       "%s - %s".format(_("Xray"), _("Routing")),
       _("Details: %s").format(
-        '<a href="https://www.xray.com/en/configuration/routing.html#routingobject" target="_blank">RoutingObject</a>'
+        '<a href="https://xtls.github.io/config/routing.html#routingobject" target="_blank">RoutingObject</a>'
       )
     );
 

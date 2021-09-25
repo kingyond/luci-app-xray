@@ -46,7 +46,7 @@ return L.view.extend<SectionItem[][]>({
       "<p>%s</p><p>%s</p>".format(
         _("A platform for building proxies to bypass network restrictions."),
         _("For more information, please visit: %s").format(
-          '<a href="https://www.xray.com" target="_blank">https://www.xray.com</a>'
+          '<a href="https://xtls.github.io" target="_blank">https://xtls.github.io</a>'
         )
       )
     );
