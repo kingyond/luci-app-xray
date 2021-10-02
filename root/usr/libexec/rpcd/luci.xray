@@ -2,60 +2,47 @@
 
 . /usr/share/libubox/jshn.sh
 
-check_running_status() {
-	local pid="$(cat /var/run/xray.main.pid 2>/dev/null)"
-
-	if [ -z "$pid" ] ; then
-		echo '{ "code": 1 }'
-		return
-	fi
-
-	local file="$(uci -q get xray.main.xray_file)"
-
-	if [ -z "$file" ] ; then
-		echo '{ "code": 2 }'
-		return
-	fi
-
-	local file_name="$(basename "$file")"
-
-	if ( pidof "$file_name" 2>/dev/null | grep -q "$pid" ) ; then
+check_running_status()
+{
+	if [ $(pgrep xray) ]; then
 		echo '{ "code": 0 }'
 	else
 		echo '{ "code": 1 }'
 	fi
 }
 
-get_xray_version() {
-	local file="$(uci -q get xray.main.xray_file)"
+get_xray_version()
+{
+	local file=$(uci -q get xray.main.xray_file)
 
-	if [ ! -s "$file" ] ; then
+	if [ ! -s $file ]; then
 		echo '{ "code": 1 }'
 		return
 	fi
 
-	test -x "$file" || chmod +x "$file"
+	test -x $file || chmod +x $file
 
-	local version="$(sh -c "$file --version 2>/dev/null | head -n1")"
+	local version=$($file version | grep -o "[0-9\.]\{5,\}" | head -1)
 
-	if [ -n "$version" ] ; then
+	if [ $version ]; then
 		printf '{ "code": 0, "version": "%s" }\n' "$version"
 	else
 		echo '{ "code": 1 }'
 	fi
 }
 
-get_list_status() {
+get_list_status()
+{
 	local name="$1"
 
-	if [ -z "$name" ] ; then
+	if [ -z "$name" ]; then
 		echo '{ "code": 128 }'
 		return
 	fi
 
 	local file="/etc/xray/${name}.txt"
 
-	if [ ! -r "$file" ] ; then
+	if [ ! -r "$file" ]; then
 		echo '{ "code": 2 }'
 		return
 	fi
