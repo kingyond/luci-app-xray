@@ -44,7 +44,7 @@ return L.view.extend<SectionItem[][]>({
       "xray",
       "%s - %s".format(_("Xray"), _("Global Settings")),
       "<p>%s</p><p>%s</p>".format(
-        _("A platform for building proxies to bypass network restrictions."),
+        _("A unified platform for anti-censorship."),
         _("For more information, please visit: %s").format(
           '<a href="https://xtls.github.io" target="_blank">https://xtls.github.io</a>'
         )
