@@ -537,6 +537,55 @@ return L.view.extend<string[]>({
     o.depends("protocol", "vmess");
     o.datatype = "uinteger";
 
+    // Settings - Trojan
+    o = s.taboption(
+      "general",
+      form.Value,
+      "s_trojan_address",
+      "%s - %s".format("Trojan", _("Address"))
+    );
+    o.modalonly = true;
+    o.depends("protocol", "trojan");
+    o.datatype = "host";
+
+    o = s.taboption(
+      "general",
+      form.Value,
+      "s_trojan_port",
+      "%s - %s".format("Trojan", _("Port"))
+    );
+    o.modalonly = true;
+    o.depends("protocol", "trojan");
+    o.datatype = "port";
+
+    o = s.taboption(
+      "general",
+      form.Value,
+      "s_trojan_password",
+      "%s - %s".format("Trojan", _("Password"))
+    );
+    o.modalonly = true;
+    o.depends("protocol", "trojan");
+
+    o = s.taboption(
+      "general",
+      form.Value,
+      "s_trojan_email",
+      "%s - %s".format("Trojan", _("Email"))
+    );
+    o.modalonly = true;
+    o.depends("protocol", "trojan");
+
+    o = s.taboption(
+      "general",
+      form.Value,
+      "s_trojan_level",
+      "%s - %s".format("Trojan", _("User Level"))
+    );
+    o.modalonly = true;
+    o.depends("protocol", "trojan");
+    o.datatype = "uinteger";
+
     // Settings - Shadowsocks
     o = s.taboption(
       "general",
@@ -576,10 +625,6 @@ return L.view.extend<string[]>({
     o.modalonly = true;
     o.depends("protocol", "shadowsocks");
     o.value("");
-    o.value("aes-256-cfb");
-    o.value("aes-128-cfb");
-    o.value("chacha20");
-    o.value("chacha20-ietf");
     o.value("aes-256-gcm");
     o.value("aes-128-gcm");
     o.value("chacha20-poly1305");
@@ -623,6 +668,7 @@ return L.view.extend<string[]>({
     o.value("http", "HTTP/2");
     o.value("domainsocket", "Domain Socket");
     o.value("quic", "QUIC");
+    o.value("grpc", "gRPC");
 
     o = s.taboption("stream", form.ListValue, "ss_security", _("Security"));
     o.modalonly = true;
@@ -1011,6 +1057,62 @@ return L.view.extend<string[]>({
       "%s - %s".format(_("Sockopt"), _("TCP fast open"))
     );
     o.modalonly = true;
+    o.value("");
+    o.value("0", _("False"));
+    o.value("1", _("True"));
+
+    // Stream Settings - gRPC
+    o = s.taboption(
+      "stream",
+      form.Value,
+      "ss_grpc_service_name",
+      "%s - %s".format("gRPC", _("Service name"))
+    );
+    o.modalonly = true;
+    o.depends("ss_network", "grpc");
+
+    o = s.taboption(
+      "stream",
+      form.ListValue,
+      "ss_grpc_multi_mode",
+      "%s - %s".format("gRPC", "Multi mode")
+    );
+    o.modalonly = true;
+    o.depends("ss_network", "grpc");
+    o.value("");
+    o.value("0", _("False"));
+    o.value("1", _("True"));
+
+    o = s.taboption(
+      "stream",
+      form.Value,
+      "ss_grpc_idle_timeout",
+      "%s - %s".format("gRPC", "Idle timeout")
+    );
+    o.modalonly = true;
+    o.depends("ss_network", "grpc");
+    o.datatype = "uinteger";
+    o.placeholder = "10";
+
+    o = s.taboption(
+      "stream",
+      form.Value,
+      "ss_grpc_health_check_timeout",
+      "%s - %s".format("gRPC", "Health check timeout")
+    );
+    o.modalonly = true;
+    o.depends("ss_network", "grpc");
+    o.datatype = "uinteger";
+    o.placeholder = "20";
+
+    o = s.taboption(
+      "stream",
+      form.ListValue,
+      "ss_grpc_permit_without_stream",
+      "%s - %s".format("gRPC", "Permit without stream")
+    );
+    o.modalonly = true;
+    o.depends("ss_network", "grpc");
     o.value("");
     o.value("0", _("False"));
     o.value("1", _("True"));

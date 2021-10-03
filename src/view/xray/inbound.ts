@@ -404,10 +404,6 @@ return L.view.extend<string[]>({
     o.modalonly = true;
     o.depends("protocol", "shadowsocks");
     o.value("");
-    o.value("aes-256-cfb");
-    o.value("aes-128-cfb");
-    o.value("chacha20");
-    o.value("chacha20-ietf");
     o.value("aes-256-gcm");
     o.value("aes-128-gcm");
     o.value("chacha20-poly1305");

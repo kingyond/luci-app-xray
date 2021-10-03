@@ -31,8 +31,8 @@ msgid "A list of static addresses, format: <code>domain|address</code>. eg: %s"
 msgstr "静态 IP 列表，格式：<code>domain|address</code>。例如：%s"
 
 #: package/htdocs/luci-static/resources/view/xray/main.js:35
-msgid "A platform for building proxies to bypass network restrictions."
-msgstr "一个用于构建网络代理的平台"
+msgid "A unified platform for anti-censorship."
+msgstr "一个反审核统一平台。"
 
 #: package/htdocs/luci-static/resources/view/xray/transparent-proxy.js:168
 msgid "APNIC delegated mirror"
@@ -963,6 +963,11 @@ msgstr "服务器端证书域名"
 msgid "Server port"
 msgstr "服务器端口"
 
+#: package/htdocs/luci-static/resources/view/xray/inbound.js:216
+#: package/htdocs/luci-static/resources/view/xray/outbound.js:348
+msgid "Service name"
+msgstr "服务名称"
+
 #: package/htdocs/luci-static/resources/view/xray/main.js:47
 msgid "Set the Xray executable file path."
 msgstr "设置 Xray 可执行文件路径。"
@@ -1167,31 +1172,6 @@ msgid "User secret"
 msgstr "用户密钥"
 
 #: package/htdocs/luci-static/resources/view/xray/about.js:27
-#: package/htdocs/luci-static/resources/view/xray/dns.js:21
-#: package/htdocs/luci-static/resources/view/xray/inbound.js:25
-#: package/htdocs/luci-static/resources/view/xray/outbound.js:175
-#: package/htdocs/luci-static/resources/view/xray/policy.js:23
-#: package/htdocs/luci-static/resources/view/xray/reverse.js:13
-#: package/htdocs/luci-static/resources/view/xray/routing.js:21
-#: package/htdocs/luci-static/resources/view/xray/transparent-proxy.js:140
-#: package/luasrc/controller/xray.lua:13
-msgid "Xray"
-msgstr ""
-
-#: package/htdocs/luci-static/resources/view/xray/main.js:51
-msgid "Xray asset location"
-msgstr "Xray 资源文件路径"
-
-#: package/htdocs/luci-static/resources/view/xray/main.js:47
-msgid "Xray file"
-msgstr "Xray 文件"
-
-#: package/htdocs/luci-static/resources/view/xray/main.js:35
-#: package/root/usr/share/luci/menu.d/luci-app-xray.json:3
-msgid "Xray"
-msgstr ""
-
-#: package/htdocs/luci-static/resources/view/xray/about.js:27
 #: package/htdocs/luci-static/resources/view/xray/include/custom.js:172
 msgid "Version: %s"
 msgstr "版本：%s"
@@ -1327,3 +1307,28 @@ msgstr "wget: 不支持 SSL, 请安装 %s 或 %s。"
 
 #~ msgid "Updating..."
 #~ msgstr "更新中..."
+
+#: package/htdocs/luci-static/resources/view/xray/about.js:27
+#: package/htdocs/luci-static/resources/view/xray/dns.js:21
+#: package/htdocs/luci-static/resources/view/xray/inbound.js:25
+#: package/htdocs/luci-static/resources/view/xray/outbound.js:175
+#: package/htdocs/luci-static/resources/view/xray/policy.js:23
+#: package/htdocs/luci-static/resources/view/xray/reverse.js:13
+#: package/htdocs/luci-static/resources/view/xray/routing.js:21
+#: package/htdocs/luci-static/resources/view/xray/transparent-proxy.js:140
+#: package/luasrc/controller/xray.lua:13
+msgid "Xray"
+msgstr ""
+
+#: package/htdocs/luci-static/resources/view/xray/main.js:51
+msgid "Xray asset location"
+msgstr "Xray 资源文件路径"
+
+#: package/htdocs/luci-static/resources/view/xray/main.js:47
+msgid "Xray file"
+msgstr "Xray 文件"
+
+#: package/htdocs/luci-static/resources/view/xray/main.js:35
+#: package/root/usr/share/luci/menu.d/luci-app-xray.json:3
+msgid "Xray"
+msgstr ""

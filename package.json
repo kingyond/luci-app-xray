@@ -1,6 +1,6 @@
 {
   "name": "luci-app-xray",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "release": "1",
   "description": "LuCI support for xray",
   "repository": "git@github.com:kilofox/luci-app-xray.git",

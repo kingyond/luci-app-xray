@@ -87,7 +87,7 @@ return L.view.extend<SectionItem[][]>({
       "asset_location",
       _("Xray asset location"),
       _(
-        "Directory where geoip.dat and geosite.dat files are, default: same directory as Xray file."
+        "Directory where geoip.dat and geosite.dat files are."
       )
     );
     o.datatype = "directory";
