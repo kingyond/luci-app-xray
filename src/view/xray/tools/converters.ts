@@ -69,12 +69,12 @@ return L.Class.extend({
     return ipList.join("\n") + "\n";
   },
 
-  vmessLinkToVmess(link: string): Vmess | null {
+  vlessLinkToVless(link: string): Vless | null {
     let matches;
     if (
       !link ||
       !(link = link.trim()) ||
-      !(matches = link.match(/^vmess:\/\/([a-zA-Z0-9/+]+={0,2})$/i)) ||
+      !(matches = link.match(/^vless:\/\/([a-zA-Z0-9/+]+={0,2})$/i)) ||
       matches.length < 2
     ) {
       return null;
@@ -89,13 +89,13 @@ return L.Class.extend({
 
     if (!decoded) return null;
 
-    let vmess: Vmess | null;
+    let vless: Vless | null;
     try {
-      vmess = JSON.parse(decoded);
+      vless = JSON.parse(decoded);
     } catch (e) {
-      vmess = null;
+      vless = null;
     }
 
-    return vmess;
+    return vless;
   },
 });

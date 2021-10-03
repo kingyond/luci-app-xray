@@ -46,10 +46,11 @@ return L.view.extend<string[]>({
     o = s.taboption("general", form.ListValue, "protocol", _("Protocol"));
     o.value("dokodemo-door", "Dokodemo-door");
     o.value("http", "HTTP");
-    o.value("mtproto", "MTProto");
-    o.value("shadowsocks", "Shadowsocks");
     o.value("socks", "Socks");
+    o.value("vless", "VLESS");
     o.value("vmess", "VMess");
+    o.value("trojan", "Trojan");
+    o.value("shadowsocks", "Shadowsocks");
 
     // Settings - Dokodemo-door
     o = s.taboption(
@@ -117,7 +118,7 @@ return L.view.extend<string[]>({
       "general",
       form.Value,
       "s_dokodemo_door_user_level",
-      "%s - %s".format("Dokodemo-door", _("User level")),
+      "%s - %s".format("Dokodemo-door", _("User Level")),
       _("All connections share this level")
     );
     o.modalonly = true;
@@ -169,112 +170,12 @@ return L.view.extend<string[]>({
       "general",
       form.Value,
       "s_http_user_level",
-      "%s - %s".format("HTTP", _("User level")),
+      "%s - %s".format("HTTP", _("User Level")),
       _("All connections share this level")
     );
     o.modalonly = true;
     o.depends("protocol", "http");
     o.datatype = "uinteger";
-
-    // Settings - MTProto
-    o = s.taboption(
-      "general",
-      form.Value,
-      "s_mtproto_user_email",
-      "%s - %s".format("MTProto", _("User email"))
-    );
-    o.modalonly = true;
-    o.depends("protocol", "mtproto");
-
-    o = s.taboption(
-      "general",
-      form.Value,
-      "s_mtproto_user_secret",
-      "%s - %s".format("MTProto", _("User secret"))
-    );
-    o.modalonly = true;
-    o.depends("protocol", "mtproto");
-    o.password = true;
-
-    o = s.taboption(
-      "general",
-      form.Value,
-      "s_mtproto_user_level",
-      "%s - %s".format("MTProto", _("User level")),
-      _("All connections share this level")
-    );
-    o.modalonly = true;
-    o.depends("protocol", "mtproto");
-    o.datatype = "uinteger";
-
-    // Settings - Shadowsocks
-    o = s.taboption(
-      "general",
-      form.Value,
-      "s_shadowsocks_email",
-      "%s - %s".format("Shadowsocks", _("Email"))
-    );
-    o.modalonly = true;
-    o.depends("protocol", "shadowsocks");
-
-    o = s.taboption(
-      "general",
-      form.ListValue,
-      "s_shadowsocks_method",
-      "%s - %s".format("Shadowsocks", _("Method"))
-    );
-    o.modalonly = true;
-    o.depends("protocol", "shadowsocks");
-    o.value("");
-    o.value("aes-256-cfb");
-    o.value("aes-128-cfb");
-    o.value("chacha20");
-    o.value("chacha20-ietf");
-    o.value("aes-256-gcm");
-    o.value("aes-128-gcm");
-    o.value("chacha20-poly1305");
-    o.value("chacha20-ietf-poly1305");
-
-    o = s.taboption(
-      "general",
-      form.Value,
-      "s_shadowsocks_password",
-      "%s - %s".format("Shadowsocks", _("Password"))
-    );
-    o.modalonly = true;
-    o.depends("protocol", "shadowsocks");
-    o.password = true;
-
-    o = s.taboption(
-      "general",
-      form.Value,
-      "s_shadowsocks_level",
-      "%s - %s".format("Shadowsocks", _("User level"))
-    );
-    o.modalonly = true;
-    o.depends("protocol", "shadowsocks");
-    o.datatype = "uinteger";
-
-    o = s.taboption(
-      "general",
-      form.Flag,
-      "s_shadowsocks_ota",
-      "%s - %s".format("Shadowsocks", _("One Time Auth (OTA)"))
-    );
-    o.modalonly = true;
-    o.depends("protocol", "shadowsocks");
-
-    o = s.taboption(
-      "general",
-      form.MultiValue,
-      "s_shadowsocks_network",
-      "%s - %s".format("Shadowsocks", _("Network"))
-    );
-    o.modalonly = true;
-    o.depends("protocol", "shadowsocks");
-    o.value("tcp");
-    o.value("udp");
-    o.default = "tcp";
 
     // Settings - Socks;
     o = s.taboption(
@@ -339,12 +240,41 @@ return L.view.extend<string[]>({
       "general",
       form.Value,
       "s_socks_user_level",
-      "%s - %s".format("Socks", _("User level")),
+      "%s - %s".format("Socks", _("User Level")),
       _("All connections share this level")
     );
     o.modalonly = true;
     o.depends("protocol", "socks");
     o.datatype = "uinteger";
+
+    // Settings - VLESS
+    o = s.taboption(
+      "general",
+      form.Value,
+      "s_vless_client_id",
+      "%s - %s".format("VLESS", _("Client ID"))
+    );
+    o.modalonly = true;
+    o.depends("protocol", "vless");
+
+    o = s.taboption(
+      "general",
+      form.Value,
+      "s_vless_client_level",
+      "%s - %s".format("VLESS", _("Client User Level"))
+    );
+    o.modalonly = true;
+    o.depends("protocol", "vless");
+    o.datatype = "uinteger";
+
+    o = s.taboption(
+      "general",
+      form.Value,
+      "s_vless_client_email",
+      "%s - %s".format("VLESS", _("Client Email"))
+    );
+    o.modalonly = true;
+    o.depends("protocol", "vless");
 
     // Settings - VMess
     o = s.taboption(
@@ -360,7 +290,7 @@ return L.view.extend<string[]>({
       "general",
       form.Value,
       "s_vmess_client_alter_id",
-      "%s - %s".format("VMess", _("Client alter ID"))
+      "%s - %s".format("VMess", _("Client Alter ID"))
     );
     o.modalonly = true;
     o.depends("protocol", "vmess");
@@ -370,7 +300,7 @@ return L.view.extend<string[]>({
       "general",
       form.Value,
       "s_vmess_client_email",
-      "%s - %s".format("VMess", _("Client email"))
+      "%s - %s".format("VMess", _("Client Email"))
     );
     o.modalonly = true;
     o.depends("protocol", "vmess");
@@ -378,8 +308,8 @@ return L.view.extend<string[]>({
     o = s.taboption(
       "general",
       form.Value,
-      "s_vmess_client_user_level",
-      "%s - %s".format("VMess", _("Client User level"))
+      "s_vmess_client_level",
+      "%s - %s".format("VMess", _("Client User Level"))
     );
     o.modalonly = true;
     o.depends("protocol", "vmess");
@@ -389,7 +319,7 @@ return L.view.extend<string[]>({
       "general",
       form.Value,
       "s_vmess_default_alter_id",
-      "%s - %s".format("VMess", _("Default alter ID"))
+      "%s - %s".format("VMess", _("Default Alter ID"))
     );
     o.modalonly = true;
     o.depends("protocol", "vmess");
@@ -398,8 +328,8 @@ return L.view.extend<string[]>({
     o = s.taboption(
       "general",
       form.Value,
-      "s_vmess_default_user_level",
-      "%s - %s".format("VMess", _("Default user level"))
+      "s_vmess_default_level",
+      "%s - %s".format("VMess", _("Default User Level"))
     );
     o.modalonly = true;
     o.depends("protocol", "vmess");
@@ -425,6 +355,104 @@ return L.view.extend<string[]>({
     );
     o.modalonly = true;
     o.depends("protocol", "vmess");
+
+    // Settings - Trojan
+    o = s.taboption(
+      "general",
+      form.Value,
+      "s_trojan_client_password",
+      "%s - %s".format("Trojan", _("Client Password"))
+    );
+    o.modalonly = true;
+    o.depends("protocol", "trojan");
+
+    o = s.taboption(
+      "general",
+      form.Value,
+      "s_trojan_client_level",
+      "%s - %s".format("Trojan", _("Client User Level"))
+    );
+    o.modalonly = true;
+    o.depends("protocol", "trojan");
+    o.datatype = "uinteger";
+
+    o = s.taboption(
+      "general",
+      form.Value,
+      "s_trojan_client_email",
+      "%s - %s".format("Trojan", _("Client Email"))
+    );
+    o.modalonly = true;
+    o.depends("protocol", "trojan");
+
+    // Settings - Shadowsocks
+    o = s.taboption(
+      "general",
+      form.Value,
+      "s_shadowsocks_email",
+      "%s - %s".format("Shadowsocks", _("Email"))
+    );
+    o.modalonly = true;
+    o.depends("protocol", "shadowsocks");
+
+    o = s.taboption(
+      "general",
+      form.ListValue,
+      "s_shadowsocks_method",
+      "%s - %s".format("Shadowsocks", _("Method"))
+    );
+    o.modalonly = true;
+    o.depends("protocol", "shadowsocks");
+    o.value("");
+    o.value("aes-256-cfb");
+    o.value("aes-128-cfb");
+    o.value("chacha20");
+    o.value("chacha20-ietf");
+    o.value("aes-256-gcm");
+    o.value("aes-128-gcm");
+    o.value("chacha20-poly1305");
+    o.value("chacha20-ietf-poly1305");
+
+    o = s.taboption(
+      "general",
+      form.Value,
+      "s_shadowsocks_password",
+      "%s - %s".format("Shadowsocks", _("Password"))
+    );
+    o.modalonly = true;
+    o.depends("protocol", "shadowsocks");
+    o.password = true;
+
+    o = s.taboption(
+      "general",
+      form.Value,
+      "s_shadowsocks_level",
+      "%s - %s".format("Shadowsocks", _("User Level"))
+    );
+    o.modalonly = true;
+    o.depends("protocol", "shadowsocks");
+    o.datatype = "uinteger";
+
+    o = s.taboption(
+      "general",
+      form.Flag,
+      "s_shadowsocks_ota",
+      "%s - %s".format("Shadowsocks", _("One Time Auth (OTA)"))
+    );
+    o.modalonly = true;
+    o.depends("protocol", "shadowsocks");
+
+    o = s.taboption(
+      "general",
+      form.MultiValue,
+      "s_shadowsocks_network",
+      "%s - %s".format("Shadowsocks", _("Network"))
+    );
+    o.modalonly = true;
+    o.depends("protocol", "shadowsocks");
+    o.value("tcp");
+    o.value("udp");
+    o.default = "tcp";
 
     /** Stream Settings  **/
     o = s.taboption("stream", form.ListValue, "ss_network", _("Network"));

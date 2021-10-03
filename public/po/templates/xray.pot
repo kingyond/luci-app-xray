@@ -196,15 +196,15 @@ msgid "Client IP"
 msgstr ""
 
 #: package/htdocs/luci-static/resources/view/xray/inbound.js:185
-msgid "Client User level"
+msgid "Client User Level"
 msgstr ""
 
 #: package/htdocs/luci-static/resources/view/xray/inbound.js:178
-msgid "Client alter ID"
+msgid "Client Alter ID"
 msgstr ""
 
 #: package/htdocs/luci-static/resources/view/xray/inbound.js:182
-msgid "Client email"
+msgid "Client Email"
 msgstr ""
 
 #: package/htdocs/luci-static/resources/view/xray/include/custom.js:197
@@ -266,11 +266,11 @@ msgid "Default"
 msgstr ""
 
 #: package/htdocs/luci-static/resources/view/xray/inbound.js:189
-msgid "Default alter ID"
+msgid "Default Alter ID"
 msgstr ""
 
 #: package/htdocs/luci-static/resources/view/xray/inbound.js:193
-msgid "Default user level"
+msgid "Default User Level"
 msgstr ""
 
 #: package/htdocs/luci-static/resources/view/xray/inbound.js:383
@@ -1159,7 +1159,7 @@ msgstr ""
 #: package/htdocs/luci-static/resources/view/xray/outbound.js:282
 #: package/htdocs/luci-static/resources/view/xray/outbound.js:304
 #: package/htdocs/luci-static/resources/view/xray/outbound.js:331
-msgid "User level"
+msgid "User Level"
 msgstr ""
 
 #: package/htdocs/luci-static/resources/view/xray/inbound.js:105

@@ -14,11 +14,11 @@ return L.view.extend<string[]>({
 
     let linksCount = 0;
     for (const link of links) {
-      let vmess;
+      let vless;
       if (
         !link ||
-        !(vmess = converters.vmessLinkToVmess(link)) ||
-        vmess.v !== "2"
+        !(vless = converters.vlessLinkToVless(link)) ||
+        vless.v !== "2"
       ) {
         continue;
       }
@@ -26,27 +26,26 @@ return L.view.extend<string[]>({
       const sid = uci.add("xray", "outbound");
       if (!sid) continue;
 
-      const address = vmess.add || "0.0.0.0";
-      const port = vmess.port || "0";
-      const tls = vmess.tls || "";
+      const address = vless.add || "0.0.0.0";
+      const port = vless.port || "0";
+      const tls = vless.tls || "";
 
-      const network = vmess.net || "";
-      const headerType = vmess.type || "";
-      const path = vmess.path || "";
+      const network = vless.net || "";
+      const headerType = vless.type || "";
+      const path = vless.path || "";
 
-      const alias = vmess.ps || "%s:%s".format(address, port);
+      const alias = vless.ps || "%s:%s".format(address, port);
 
       uci.set("xray", sid, "alias", alias);
-      uci.set("xray", sid, "protocol", "vmess");
-      uci.set("xray", sid, "s_vmess_address", address);
-      uci.set("xray", sid, "s_vmess_port", port);
-      uci.set("xray", sid, "s_vmess_user_id", vmess.id || "");
-      uci.set("xray", sid, "s_vmess_user_alter_id", vmess.aid || "");
+      uci.set("xray", sid, "protocol", "vless");
+      uci.set("xray", sid, "s_vless_address", address);
+      uci.set("xray", sid, "s_vless_port", port);
+      uci.set("xray", sid, "s_vless_user_id", vless.id || "");
       uci.set("xray", sid, "ss_security", tls);
 
       let hosts: string[] = [];
-      if (vmess.host) {
-        hosts = vmess.host.split(",");
+      if (vless.host) {
+        hosts = vless.host.split(",");
       }
 
       switch (network) {
@@ -167,7 +166,7 @@ return L.view.extend<string[]>({
           return _("Empty field.");
         }
 
-        if (!/^(vmess:\/\/[a-zA-Z0-9/+=]+\s*)+$/i.test(val)) {
+        if (!/^(vless:\/\/[a-zA-Z0-9/+=]+\s*)+$/i.test(val)) {
           return _("Invalid links.");
         }
 
@@ -175,12 +174,12 @@ return L.view.extend<string[]>({
       },
     });
 
-    ui.showModal(_("Import Vmess Links"), [
+    ui.showModal(_("Import VLESS Links"), [
       E("div", {}, [
         E(
           "p",
           {},
-          _("Allowed link format: <code>%s</code>").format("vmess://xxxxx")
+          _("Allowed link format: <code>%s</code>").format("vless://xxxxx")
         ),
         textarea.render(),
       ]),
@@ -259,12 +258,13 @@ return L.view.extend<string[]>({
     o.value("dns", "DNS");
     o.value("freedom", "Freedom");
     o.value("http", "HTTP/2");
-    o.value("mtproto", "MTProto");
-    o.value("shadowsocks", "Shadowsocks");
     o.value("socks", "Socks");
+    o.value("vless", "VLESS");
     o.value("vmess", "VMess");
+    o.value("trojan", "Trojan");
+    o.value("shadowsocks", "Shadowsocks");
 
-    // Settings Blackhole
+    // Settings - Blackhole
     o = s.taboption(
       "general",
       form.ListValue,
@@ -277,7 +277,7 @@ return L.view.extend<string[]>({
     o.value("none", _("None"));
     o.value("http", "HTTP");
 
-    // Settings DNS
+    // Settings - DNS
     o = s.taboption(
       "general",
       form.ListValue,
@@ -309,7 +309,7 @@ return L.view.extend<string[]>({
     o.depends("protocol", "dns");
     o.datatype = "port";
 
-    // Settings Freedom
+    // Settings - Freedom
     o = s.taboption(
       "general",
       form.ListValue,
@@ -337,7 +337,7 @@ return L.view.extend<string[]>({
       "general",
       form.Value,
       "s_freedom_user_level",
-      "%s - %s".format("Freedom", _("User level"))
+      "%s - %s".format("Freedom", _("User Level"))
     );
     o.modalonly = true;
     o.depends("protocol", "freedom");
@@ -382,6 +382,160 @@ return L.view.extend<string[]>({
     o.modalonly = true;
     o.depends("protocol", "http");
     o.password = true;
+
+    // Settings - Socks
+    o = s.taboption(
+      "general",
+      form.Value,
+      "s_socks_server_address",
+      "%s - %s".format("Socks", _("Server address"))
+    );
+    o.modalonly = true;
+    o.depends("protocol", "socks");
+    o.datatype = "host";
+
+    o = s.taboption(
+      "general",
+      form.Value,
+      "s_socks_server_port",
+      "%s - %s".format("Socks", _("Server port"))
+    );
+    o.modalonly = true;
+    o.depends("protocol", "socks");
+    o.datatype = "port";
+
+    o = s.taboption(
+      "general",
+      form.Value,
+      "s_socks_account_user",
+      "%s - %s".format("Socks", _("User"))
+    );
+    o.modalonly = true;
+    o.depends("protocol", "socks");
+
+    o = s.taboption(
+      "general",
+      form.Value,
+      "s_socks_account_pass",
+      "%s - %s".format("Socks", _("Password"))
+    );
+    o.modalonly = true;
+    o.depends("protocol", "socks");
+    o.password = true;
+
+    o = s.taboption(
+      "general",
+      form.Value,
+      "s_socks_user_level",
+      "%s - %s".format("Socks", _("User Level"))
+    );
+    o.modalonly = true;
+    o.depends("protocol", "socks");
+    o.datatype = "uinteger";
+
+    // Settings - VLESS
+    o = s.taboption(
+      "general",
+      form.Value,
+      "s_vless_address",
+      "%s - %s".format("VLESS", _("Address"))
+    );
+    o.modalonly = true;
+    o.depends("protocol", "vless");
+    o.datatype = "host";
+
+    o = s.taboption(
+      "general",
+      form.Value,
+      "s_vless_port",
+      "%s - %s".format("VLESS", _("Port"))
+    );
+    o.modalonly = true;
+    o.depends("protocol", "vless");
+    o.datatype = "port";
+
+    o = s.taboption(
+      "general",
+      form.Value,
+      "s_vless_user_id",
+      "%s - %s".format("VLESS", _("User ID"))
+    );
+    o.modalonly = true;
+    o.depends("protocol", "vless");
+
+    o = s.taboption(
+      "general",
+      form.Value,
+      "s_vless_user_level",
+      "%s - %s".format("VLESS", _("User Level"))
+    );
+    o.modalonly = true;
+    o.depends("protocol", "vless");
+    o.datatype = "uinteger";
+
+    // Settings - VMess
+    o = s.taboption(
+      "general",
+      form.Value,
+      "s_vmess_address",
+      "%s - %s".format("VMess", _("Address"))
+    );
+    o.modalonly = true;
+    o.depends("protocol", "vmess");
+    o.datatype = "host";
+
+    o = s.taboption(
+      "general",
+      form.Value,
+      "s_vmess_port",
+      "%s - %s".format("VMess", _("Port"))
+    );
+    o.modalonly = true;
+    o.depends("protocol", "vmess");
+    o.datatype = "port";
+
+    o = s.taboption(
+      "general",
+      form.Value,
+      "s_vmess_user_id",
+      "%s - %s".format("VMess", _("User ID"))
+    );
+    o.modalonly = true;
+    o.depends("protocol", "vmess");
+
+    o = s.taboption(
+      "general",
+      form.Value,
+      "s_vmess_user_alter_id",
+      "%s - %s".format("VMess", _("Alter ID"))
+    );
+    o.modalonly = true;
+    o.depends("protocol", "vmess");
+    o.datatype = "and(uinteger, max(65535))";
+
+    o = s.taboption(
+      "general",
+      form.ListValue,
+      "s_vmess_user_security",
+      "%s - %s".format("VMess", _("Security"))
+    );
+    o.modalonly = true;
+    o.depends("protocol", "vmess");
+    o.value("");
+    o.value("auto", _("Auto"));
+    o.value("aes-128-gcm");
+    o.value("chacha20-poly1305");
+    o.value("none", _("None"));
+
+    o = s.taboption(
+      "general",
+      form.Value,
+      "s_vmess_user_level",
+      "%s - %s".format("VMess", _("User Level"))
+    );
+    o.modalonly = true;
+    o.depends("protocol", "vmess");
+    o.datatype = "uinteger";
 
     // Settings - Shadowsocks
     o = s.taboption(
@@ -445,7 +599,7 @@ return L.view.extend<string[]>({
       "general",
       form.Value,
       "s_shadowsocks_level",
-      "%s - %s".format("Shadowsocks", _("User level"))
+      "%s - %s".format("Shadowsocks", _("User Level"))
     );
     o.modalonly = true;
     o.depends("protocol", "shadowsocks");
@@ -459,120 +613,6 @@ return L.view.extend<string[]>({
     );
     o.modalonly = true;
     o.depends("protocol", "shadowsocks");
-
-    // Settings - Socks
-    o = s.taboption(
-      "general",
-      form.Value,
-      "s_socks_server_address",
-      "%s - %s".format("Socks", _("Server address"))
-    );
-    o.modalonly = true;
-    o.depends("protocol", "socks");
-    o.datatype = "host";
-
-    o = s.taboption(
-      "general",
-      form.Value,
-      "s_socks_server_port",
-      "%s - %s".format("Socks", _("Server port"))
-    );
-    o.modalonly = true;
-    o.depends("protocol", "socks");
-    o.datatype = "port";
-
-    o = s.taboption(
-      "general",
-      form.Value,
-      "s_socks_account_user",
-      "%s - %s".format("Socks", _("User"))
-    );
-    o.modalonly = true;
-    o.depends("protocol", "socks");
-
-    o = s.taboption(
-      "general",
-      form.Value,
-      "s_socks_account_pass",
-      "%s - %s".format("Socks", _("Password"))
-    );
-    o.modalonly = true;
-    o.depends("protocol", "socks");
-    o.password = true;
-
-    o = s.taboption(
-      "general",
-      form.Value,
-      "s_socks_user_level",
-      "%s - %s".format("Socks", _("User level"))
-    );
-    o.modalonly = true;
-    o.depends("protocol", "socks");
-    o.datatype = "uinteger";
-
-    // Settings - VMess
-    o = s.taboption(
-      "general",
-      form.Value,
-      "s_vmess_address",
-      "%s - %s".format("VMess", _("Address"))
-    );
-    o.modalonly = true;
-    o.depends("protocol", "vmess");
-    o.datatype = "host";
-
-    o = s.taboption(
-      "general",
-      form.Value,
-      "s_vmess_port",
-      "%s - %s".format("VMess", _("Port"))
-    );
-    o.modalonly = true;
-    o.depends("protocol", "vmess");
-    o.datatype = "port";
-
-    o = s.taboption(
-      "general",
-      form.Value,
-      "s_vmess_user_id",
-      "%s - %s".format("VMess", _("User ID"))
-    );
-    o.modalonly = true;
-    o.depends("protocol", "vmess");
-
-    o = s.taboption(
-      "general",
-      form.Value,
-      "s_vmess_user_alter_id",
-      "%s - %s".format("VMess", _("Alter ID"))
-    );
-    o.modalonly = true;
-    o.depends("protocol", "vmess");
-    o.datatype = "and(uinteger, max(65535))";
-
-    o = s.taboption(
-      "general",
-      form.ListValue,
-      "s_vmess_user_security",
-      "%s - %s".format("VMess", _("Security"))
-    );
-    o.modalonly = true;
-    o.depends("protocol", "vmess");
-    o.value("");
-    o.value("auto", _("Auto"));
-    o.value("aes-128-gcm");
-    o.value("chacha20-poly1305");
-    o.value("none", _("None"));
-
-    o = s.taboption(
-      "general",
-      form.Value,
-      "s_vmess_user_level",
-      "%s - %s".format("VMess", _("User level"))
-    );
-    o.modalonly = true;
-    o.depends("protocol", "vmess");
-    o.datatype = "uinteger";
 
     /** Stream Settings **/
     o = s.taboption("stream", form.ListValue, "ss_network", _("Network"));
