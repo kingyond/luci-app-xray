@@ -196,15 +196,15 @@ msgid "Client IP"
 msgstr "系统 IP 地址"
 
 #: package/htdocs/luci-static/resources/view/xray/inbound.js:185
-msgid "Client User level"
+msgid "Client User Level"
 msgstr "用户等级"
 
 #: package/htdocs/luci-static/resources/view/xray/inbound.js:178
-msgid "Client alter ID"
+msgid "Client Alter ID"
 msgstr "用户 Alter ID"
 
 #: package/htdocs/luci-static/resources/view/xray/inbound.js:182
-msgid "Client email"
+msgid "Client Email"
 msgstr "用户邮箱地址"
 
 #: package/htdocs/luci-static/resources/view/xray/include/custom.js:197
@@ -266,11 +266,11 @@ msgid "Default"
 msgstr "默认"
 
 #: package/htdocs/luci-static/resources/view/xray/inbound.js:189
-msgid "Default alter ID"
+msgid "Default Alter ID"
 msgstr "默认 Alter ID"
 
 #: package/htdocs/luci-static/resources/view/xray/inbound.js:193
-msgid "Default user level"
+msgid "Default User Level"
 msgstr "默认用户等级"
 
 #: package/htdocs/luci-static/resources/view/xray/inbound.js:383
@@ -1159,7 +1159,7 @@ msgstr "用户邮箱地址"
 #: package/htdocs/luci-static/resources/view/xray/outbound.js:282
 #: package/htdocs/luci-static/resources/view/xray/outbound.js:304
 #: package/htdocs/luci-static/resources/view/xray/outbound.js:331
-msgid "User level"
+msgid "User Level"
 msgstr "用户等级"
 
 #: package/htdocs/luci-static/resources/view/xray/inbound.js:105
@@ -1280,8 +1280,8 @@ msgstr "wget: 不支持 SSL, 请安装 %s 或 %s。"
 #~ msgid "Import failed"
 #~ msgstr "导入失败"
 
-#~ msgid "Import multiple vmess:// links at once. One link per line."
-#~ msgstr "可一次添加多个 vmess:// 链接，每个链接一行。"
+#~ msgid "Import multiple vless:// links at once. One link per line."
+#~ msgstr "可一次添加多个 vless:// 链接，每个链接一行。"
 
 #~ msgid "Importing..."
 #~ msgstr "导入中……"

@@ -234,29 +234,32 @@ inbound_section_validate() {
 		's_http_allow_transparent:bool:0' \
 		's_http_timeout:uinteger' \
 		's_http_user_level:uinteger' \
-		's_mtproto_user_email:string' \
-		's_mtproto_user_secret:string' \
-		's_mtproto_user_level:uinteger' \
-		's_shadowsocks_email:string' \
-		's_shadowsocks_method:string' \
-		's_shadowsocks_password:string' \
-		's_shadowsocks_level:uinteger' \
-		's_shadowsocks_ota:bool:0' \
-		's_shadowsocks_network:list(or("tcp", "udp")):tcp' \
 		's_socks_auth:or("noauth", "password")' \
 		's_socks_account_user:string' \
 		's_socks_account_pass:string' \
 		's_socks_udp:bool:0' \
 		's_socks_ip:host' \
 		's_socks_user_level:uinteger' \
+		's_vless_client_id:string' \
+		's_vless_client_level:uinteger' \
+		's_vless_client_email:string' \
 		's_vmess_client_id:string' \
 		's_vmess_client_alter_id:and(uinteger, max(65535))' \
 		's_vmess_client_email:string' \
-		's_vmess_client_user_level:uinteger' \
+		's_vmess_client_level:uinteger' \
 		's_vmess_default_alter_id:and(uinteger, max(65535))' \
-		's_vmess_default_user_level:uinteger' \
+		's_vmess_default_level:uinteger' \
 		's_vmess_detour_to:string' \
 		's_vmess_disable_insecure_encryption:bool:0' \
+		's_trojan_client_password:string' \
+		's_trojan_client_email:string' \
+		's_trojan_client_level:uinteger' \
+		's_shadowsocks_email:string' \
+		's_shadowsocks_method:string' \
+		's_shadowsocks_password:string' \
+		's_shadowsocks_level:uinteger' \
+		's_shadowsocks_ota:bool:0' \
+		's_shadowsocks_network:list(or("tcp", "udp")):tcp' \
 		'ss_network:or("tcp", "kcp", "ws", "http", "domainsocket", "quic")' \
 		'ss_security:or("none", "tls")' \
 		'ss_tls_server_name:host' \
@@ -318,6 +321,25 @@ outbound_section_validate() {
 		's_http_server_port:port' \
 		's_http_account_user:string' \
 		's_http_account_pass:string' \
+		's_socks_server_address:host' \
+		's_socks_server_port:port' \
+		's_socks_account_user:string' \
+		's_socks_account_pass:string' \
+		's_socks_user_level:uinteger' \
+		's_vless_address:host' \
+		's_vless_port:port' \
+		's_vless_user_id:string' \
+		's_vless_user_level:uinteger' \
+		's_vmess_address:host' \
+		's_vmess_port:port' \
+		's_vmess_user_id:string' \
+		's_vmess_user_alter_id:and(uinteger, max(65535))' \
+		's_vmess_user_security:or("auto", "aes-128-gcm", "chacha20-poly1305", "none")' \
+		's_vmess_user_level:uinteger' \
+		's_trojan_address:host' \
+		's_trojan_port:port' \
+		's_trojan_password:string' \
+		's_trojan_level:uinteger' \
 		's_shadowsocks_email:string' \
 		's_shadowsocks_address:host' \
 		's_shadowsocks_port:port' \
@@ -325,17 +347,6 @@ outbound_section_validate() {
 		's_shadowsocks_password:string' \
 		's_shadowsocks_level:uinteger' \
 		's_shadowsocks_ota:bool:0' \
-		's_socks_server_address:host' \
-		's_socks_server_port:port' \
-		's_socks_account_user:string' \
-		's_socks_account_pass:string' \
-		's_socks_user_level:uinteger' \
-		's_vmess_address:host' \
-		's_vmess_port:port' \
-		's_vmess_user_id:string' \
-		's_vmess_user_alter_id:and(uinteger, max(65535))' \
-		's_vmess_user_security:or("auto", "aes-128-gcm", "chacha20-poly1305", "none")' \
-		's_vmess_user_level:uinteger' \
 		'ss_network:or("tcp", "kcp", "ws", "http", "domainsocket", "quic")' \
 		'ss_security:or("none", "tls")' \
 		'ss_tls_server_name:host' \
@@ -1109,41 +1120,6 @@ add_inbound_setting() {
 
 			json_close_object # settings
 			;;
-		"mtproto")
-			json_add_object "settings"
-
-			if [ -n "$s_mtproto_user_email" ] ; then
-				json_add_array "users"
-				json_add_object ""
-
-				json_add_string "email" "$s_mtproto_user_email"
-				json_add_string "secret" "$s_mtproto_user_secret"
-
-				test -n "$s_mtproto_user_level" && \
-					json_add_int "level" "$s_mtproto_user_level"
-
-				json_close_object
-				json_close_array # users
-			fi
-
-			json_close_object # settings
-			;;
-		"shadowsocks")
-			json_add_object "settings"
-
-			json_add_string "method" "$s_shadowsocks_method"
-			json_add_string "password" "$s_shadowsocks_password"
-
-			test -n "$s_shadowsocks_email" && \
-				json_add_string "email" "$s_shadowsocks_email"
-			test -n "$s_shadowsocks_level" && \
-				json_add_int "level" "$s_shadowsocks_level"
-
-			json_add_boolean "ota" "$s_shadowsocks_ota"
-			json_add_string "network" "$(echo "$s_shadowsocks_network" | tr -s ' ' ',')"
-
-			json_close_object # settings
-			;;
 		"socks")
 			json_add_object "settings"
 
@@ -1167,6 +1143,28 @@ add_inbound_setting() {
 
 			json_close_object # settings
 			;;
+		"vless")
+			json_add_object "settings"
+
+			if [ -n "$s_vless_client_id" ]; then
+				json_add_array "clients"
+				json_add_object ""
+
+				json_add_string "id" "$s_vless_client_id"
+
+				if [ -n "$s_vless_client_level" ]; then
+					json_add_int "level" "$s_vless_client_level"
+				fi
+				if [ -n "$s_vless_client_email" ]; then
+					json_add_string "email" "$s_vless_client_email"
+				fi
+
+				json_close_object
+				json_close_array # clients
+			fi
+
+			json_close_object # settings
+			;;
 		"vmess")
 			json_add_object "settings"
 
@@ -1176,12 +1174,15 @@ add_inbound_setting() {
 
 				json_add_string "id" "$s_vmess_client_id"
 
-				test -n "$s_vmess_client_alter_id" && \
+				if [ -n "$s_vmess_client_alter_id" ]; then
 					json_add_int "alterId" "$s_vmess_client_alter_id"
-				test -n "$s_vmess_client_email" && \
+				fi
+				if [ -n "$s_vmess_client_email" ]; then
 					json_add_string "email" "$s_vmess_client_email"
-				test -n "$s_vmess_client_user_level" && \
-					json_add_int "level" "$s_vmess_client_user_level"
+				fi
+				if [ -n "$s_vmess_client_level" ]; then
+					json_add_int "level" "$s_vmess_client_level"
+				fi
 
 				json_close_object
 				json_close_array # clients
@@ -1189,10 +1190,12 @@ add_inbound_setting() {
 
 			json_add_object "default"
 
-			test -n "$s_vmess_default_alter_id" && \
+			if [ -n "$s_vmess_default_alter_id" ]; then
 				json_add_int "alterId" "$s_vmess_default_alter_id"
-			test -n "$s_vmess_default_user_level" && \
-				json_add_int "level" "$s_vmess_default_user_level"
+			fi
+			if [ -n "$s_vmess_default_level" ]; then
+				json_add_int "level" "$s_vmess_default_level"
+			fi
 
 			json_close_object # default
 
@@ -1203,6 +1206,44 @@ add_inbound_setting() {
 			fi
 
 			json_add_boolean "disableInsecureEncryption" "$s_vmess_disable_insecure_encryption"
+
+			json_close_object # settings
+			;;
+		"trojan")
+			json_add_object "settings"
+
+			if [ -n "$s_trojan_client_password" ]; then
+				json_add_array "clients"
+				json_add_object ""
+
+				json_add_string "id" "$s_trojan_client_password"
+
+				if [ -n "$s_trojan_client_email" ]; then
+					json_add_string "email" "$s_trojan_client_email"
+				fi
+				if [ -n "$s_trojan_client_level" ]; then
+					json_add_int "level" "$s_trojan_client_level"
+				fi
+
+				json_close_object
+				json_close_array # clients
+			fi
+
+			json_close_object # settings
+			;;
+		"shadowsocks")
+			json_add_object "settings"
+
+			json_add_string "method" "$s_shadowsocks_method"
+			json_add_string "password" "$s_shadowsocks_password"
+
+			test -n "$s_shadowsocks_email" && \
+				json_add_string "email" "$s_shadowsocks_email"
+			test -n "$s_shadowsocks_level" && \
+				json_add_int "level" "$s_shadowsocks_level"
+
+			json_add_boolean "ota" "$s_shadowsocks_ota"
+			json_add_string "network" "$(echo "$s_shadowsocks_network" | tr -s ' ' ',')"
 
 			json_close_object # settings
 			;;
@@ -1553,32 +1594,6 @@ add_outbound_setting() {
 			json_close_array # servers
 			json_close_object # settings
 			;;
-		"mtproto")
-			json_add_object "settings"
-			json_close_object
-			;;
-		"shadowsocks")
-			json_add_object "settings"
-			json_add_array "servers"
-
-			json_add_object ""
-			test -n "$s_shadowsocks_email" && \
-				json_add_string "email" "$s_shadowsocks_email"
-			json_add_string "address" "$s_shadowsocks_address"
-			append_server_address "$s_shadowsocks_address"
-
-			json_add_int "port" "$s_shadowsocks_port"
-			json_add_string "method" "$s_shadowsocks_method"
-			json_add_string "password" "$s_shadowsocks_password"
-
-			test -n "$s_shadowsocks_level" && \
-				json_add_int "level" "$s_shadowsocks_level"
-			json_add_boolean "ota" "$s_shadowsocks_ota"
-			json_close_object
-
-			json_close_array # servers
-			json_close_object # settings
-			;;
 		"socks")
 			json_add_object "settings"
 			json_add_array "servers"
@@ -1609,10 +1624,35 @@ add_outbound_setting() {
 			json_close_array # servers
 			json_close_object # settings
 			;;
+		"vless")
+			json_add_object "settings"
+			json_add_array "vnext"
+
+			json_add_object ""
+
+			json_add_string "address" "$s_vless_address"
+			append_server_address "$s_vless_address"
+
+			json_add_int "port" "$s_vless_port"
+
+			json_add_array "users"
+			json_add_object ""
+			json_add_string "id" "$s_vless_user_id"
+			if [ -n "$s_vless_user_level" ]; then
+				json_add_int "level" "$s_vless_user_level"
+			fi
+			json_close_object
+			json_close_array # users
+
+			json_close_object
+
+			json_close_array # vnext
+			json_close_object # settings
+			;;
 		"vmess")
 			json_add_object "settings"
-
 			json_add_array "vnext"
+
 			json_add_object ""
 
 			json_add_string "address" "$s_vmess_address"
@@ -1634,6 +1674,53 @@ add_outbound_setting() {
 			json_close_object
 
 			json_close_array # vnext
+			json_close_object # settings
+			;;
+		"trojan")
+			json_add_object "settings"
+			json_add_array "servers"
+
+			json_add_object ""
+
+			json_add_string "address" "$s_trojan_address"
+			append_server_address "$s_trojan_address"
+
+			json_add_int "port" "$s_trojan_port"
+
+			json_add_string "password" "$s_trojan_password"
+
+			if [ -n "$s_trojan_email" ]; then
+				json_add_string "email" "$s_trojan_email"
+			fi
+			if [ -n "$s_trojan_level" ]; then
+				json_add_int "level" "$s_trojan_level"
+			fi
+
+			json_close_object
+
+			json_close_array # servers
+			json_close_object # settings
+			;;
+		"shadowsocks")
+			json_add_object "settings"
+			json_add_array "servers"
+
+			json_add_object ""
+			test -n "$s_shadowsocks_email" && \
+				json_add_string "email" "$s_shadowsocks_email"
+			json_add_string "address" "$s_shadowsocks_address"
+			append_server_address "$s_shadowsocks_address"
+
+			json_add_int "port" "$s_shadowsocks_port"
+			json_add_string "method" "$s_shadowsocks_method"
+			json_add_string "password" "$s_shadowsocks_password"
+
+			test -n "$s_shadowsocks_level" && \
+				json_add_int "level" "$s_shadowsocks_level"
+			json_add_boolean "ota" "$s_shadowsocks_ota"
+			json_close_object
+
+			json_close_array # servers
 			json_close_object # settings
 			;;
 	esac
