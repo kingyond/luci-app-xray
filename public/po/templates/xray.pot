@@ -293,9 +293,7 @@ msgid "Direct list DNS"
 msgstr ""
 
 #: package/htdocs/luci-static/resources/view/xray/main.js:51
-msgid ""
-"Directory where geoip.dat and geosite.dat files are."
-"as Xray file."
+msgid "Directory where geoip.dat and geosite.dat files are."
 msgstr ""
 
 #: package/htdocs/luci-static/resources/view/xray/inbound.js:200
