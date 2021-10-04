@@ -86,9 +86,7 @@ return L.view.extend<SectionItem[][]>({
       form.Value,
       "asset_location",
       _("Xray asset location"),
-      _(
-        "Directory where geoip.dat and geosite.dat files are."
-      )
+      _("Directory where geoip.dat and geosite.dat files are.")
     );
     o.datatype = "directory";
     o.placeholder = "/usr/bin";
