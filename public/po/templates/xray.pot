@@ -294,7 +294,7 @@ msgstr ""
 
 #: package/htdocs/luci-static/resources/view/xray/main.js:51
 msgid ""
-"Directory where geoip.dat and geosite.dat files are"
+"Directory where geoip.dat and geosite.dat files are."
 "as Xray file."
 msgstr ""
 
