@@ -459,6 +459,7 @@ return L.view.extend<string[]>({
     o.value("http", "HTTP/2");
     o.value("domainsocket", "Domain Socket");
     o.value("quic", "QUIC");
+    o.value("grpc", "gRPC");
 
     o = s.taboption("stream", form.ListValue, "ss_security", _("Security"));
     o.modalonly = true;
@@ -859,6 +860,62 @@ return L.view.extend<string[]>({
     o.value("redirect", "Redirect");
     o.value("tproxy", "TProxy");
     o.value("off", _("Off"));
+
+    // Stream Settings - gRPC
+    o = s.taboption(
+      "stream",
+      form.Value,
+      "ss_grpc_service_name",
+      "%s - %s".format("gRPC", _("Service name"))
+    );
+    o.modalonly = true;
+    o.depends("ss_network", "grpc");
+
+    o = s.taboption(
+      "stream",
+      form.ListValue,
+      "ss_grpc_multi_mode",
+      "%s - %s".format("gRPC", "Multi mode")
+    );
+    o.modalonly = true;
+    o.depends("ss_network", "grpc");
+    o.value("");
+    o.value("0", _("False"));
+    o.value("1", _("True"));
+
+    o = s.taboption(
+      "stream",
+      form.Value,
+      "ss_grpc_idle_timeout",
+      "%s - %s".format("gRPC", "Idle timeout")
+    );
+    o.modalonly = true;
+    o.depends("ss_network", "grpc");
+    o.datatype = "uinteger";
+    o.placeholder = "10";
+
+    o = s.taboption(
+      "stream",
+      form.Value,
+      "ss_grpc_health_check_timeout",
+      "%s - %s".format("gRPC", "Health check timeout")
+    );
+    o.modalonly = true;
+    o.depends("ss_network", "grpc");
+    o.datatype = "uinteger";
+    o.placeholder = "20";
+
+    o = s.taboption(
+      "stream",
+      form.ListValue,
+      "ss_grpc_permit_without_stream",
+      "%s - %s".format("gRPC", "Permit without stream")
+    );
+    o.modalonly = true;
+    o.depends("ss_network", "grpc");
+    o.value("");
+    o.value("0", _("False"));
+    o.value("1", _("True"));
 
     /** Other Settings **/
     o = s.taboption("other", form.Value, "tag", _("Tag"));

@@ -293,7 +293,9 @@ msgid "Direct list DNS"
 msgstr "直连列表 DNS"
 
 #: package/htdocs/luci-static/resources/view/xray/main.js:51
-msgid "Directory where geoip.dat and geosite.dat files are."
+msgid ""
+"Directory where geoip.dat and geosite.dat files are, default to the same "
+"directory as Xray file."
 msgstr "geoip.dat 和 geosite.dat 文件所在目录"
 
 #: package/htdocs/luci-static/resources/view/xray/inbound.js:200
@@ -956,15 +958,15 @@ msgstr "服务器地址"
 msgid "Server name"
 msgstr "服务器端证书域名"
 
-#: package/htdocs/luci-static/resources/view/xray/outbound.js:244
-#: package/htdocs/luci-static/resources/view/xray/outbound.js:293
-msgid "Server port"
-msgstr "服务器端口"
-
 #: package/htdocs/luci-static/resources/view/xray/inbound.js:216
 #: package/htdocs/luci-static/resources/view/xray/outbound.js:348
 msgid "Service name"
 msgstr "服务名称"
+
+#: package/htdocs/luci-static/resources/view/xray/outbound.js:244
+#: package/htdocs/luci-static/resources/view/xray/outbound.js:293
+msgid "Server port"
+msgstr "服务器端口"
 
 #: package/htdocs/luci-static/resources/view/xray/main.js:47
 msgid "Set the Xray executable file path."
@@ -1204,6 +1206,28 @@ msgctxt "libustream-openssl"
 msgid "wget: SSL support not available, please install %s or %s."
 msgstr "wget: 不支持 SSL, 请安装 %s 或 %s。"
 
+#: package/htdocs/luci-static/resources/view/xray/about.js:27
+#: package/htdocs/luci-static/resources/view/xray/dns.js:21
+#: package/htdocs/luci-static/resources/view/xray/inbound.js:25
+#: package/htdocs/luci-static/resources/view/xray/main.js:35
+#: package/htdocs/luci-static/resources/view/xray/outbound.js:175
+#: package/htdocs/luci-static/resources/view/xray/policy.js:23
+#: package/htdocs/luci-static/resources/view/xray/reverse.js:13
+#: package/htdocs/luci-static/resources/view/xray/routing.js:21
+#: package/htdocs/luci-static/resources/view/xray/transparent-proxy.js:140
+#: package/luasrc/controller/xray.lua:13
+#: package/root/usr/share/luci/menu.d/luci-app-xray.json:3
+msgid "Xray"
+msgstr ""
+
+#: package/htdocs/luci-static/resources/view/xray/main.js:51
+msgid "Xray asset location"
+msgstr "Xray 资源文件路径"
+
+#: package/htdocs/luci-static/resources/view/xray/main.js:47
+msgid "Xray file"
+msgstr "Xray 文件"
+
 #~ msgid "An IP address for sending traffic out."
 #~ msgstr "用于发送数据的 IP 地址"
 
@@ -1305,28 +1329,3 @@ msgstr "wget: 不支持 SSL, 请安装 %s 或 %s。"
 
 #~ msgid "Updating..."
 #~ msgstr "更新中..."
-
-#: package/htdocs/luci-static/resources/view/xray/about.js:27
-#: package/htdocs/luci-static/resources/view/xray/dns.js:21
-#: package/htdocs/luci-static/resources/view/xray/inbound.js:25
-#: package/htdocs/luci-static/resources/view/xray/outbound.js:175
-#: package/htdocs/luci-static/resources/view/xray/policy.js:23
-#: package/htdocs/luci-static/resources/view/xray/reverse.js:13
-#: package/htdocs/luci-static/resources/view/xray/routing.js:21
-#: package/htdocs/luci-static/resources/view/xray/transparent-proxy.js:140
-#: package/luasrc/controller/xray.lua:13
-msgid "Xray"
-msgstr ""
-
-#: package/htdocs/luci-static/resources/view/xray/main.js:51
-msgid "Xray asset location"
-msgstr "Xray 资源文件路径"
-
-#: package/htdocs/luci-static/resources/view/xray/main.js:47
-msgid "Xray file"
-msgstr "Xray 文件"
-
-#: package/htdocs/luci-static/resources/view/xray/main.js:35
-#: package/root/usr/share/luci/menu.d/luci-app-xray.json:3
-msgid "Xray"
-msgstr ""

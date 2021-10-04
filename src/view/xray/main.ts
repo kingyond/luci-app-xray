@@ -86,10 +86,12 @@ return L.view.extend<SectionItem[][]>({
       form.Value,
       "asset_location",
       _("Xray asset location"),
-      _("Directory where geoip.dat and geosite.dat files are.")
+      _(
+        "Directory where geoip.dat and geosite.dat files are, default to the same directory as Xray file."
+      )
     );
     o.datatype = "directory";
-    o.placeholder = "/usr/bin";
+    o.placeholder = "/usr/share/xray";
 
     o = s.option(
       form.Value,
