@@ -294,9 +294,9 @@ msgstr "直连列表 DNS"
 
 #: package/htdocs/luci-static/resources/view/xray/main.js:51
 msgid ""
-"Directory where geoip.dat and geosite.dat files are, default: same directory "
+"Directory where geoip.dat and geosite.dat files are"
 "as Xray file."
-msgstr "geoip.dat 和 geosite.dat 文件所在目录，默认：和 Xray 文件所在目录相同"
+msgstr "geoip.dat 和 geosite.dat 文件所在目录"
 
 #: package/htdocs/luci-static/resources/view/xray/inbound.js:200
 msgid "Disable insecure encryption"
