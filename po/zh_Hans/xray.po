@@ -207,6 +207,10 @@ msgstr "用户 Alter ID"
 msgid "Client Email"
 msgstr "用户邮箱地址"
 
+#: package/htdocs/luci-static/resources/view/xray/inbound.js:182
+msgid "Client Flow"
+msgstr "流控模式"
+
 #: package/htdocs/luci-static/resources/view/xray/include/custom.js:197
 msgid "Collecting data..."
 msgstr "正在收集数据..."
@@ -326,10 +330,6 @@ msgstr "域名策略"
 #: package/htdocs/luci-static/resources/view/xray/dns.js:47
 msgid "Domains"
 msgstr "域名"
-
-#: package/htdocs/luci-static/resources/view/xray/about.js:27
-msgid "Donate: %s"
-msgstr "捐助：%s"
 
 #: package/htdocs/luci-static/resources/view/xray/inbound.js:304
 #: package/htdocs/luci-static/resources/view/xray/outbound.js:430
@@ -1154,6 +1154,10 @@ msgstr "用户 ID"
 #: package/htdocs/luci-static/resources/view/xray/inbound.js:102
 msgid "User email"
 msgstr "用户邮箱地址"
+
+#: package/htdocs/luci-static/resources/view/xray/outbound.js:102
+msgid "User Flow"
+msgstr "流控模式"
 
 #: package/htdocs/luci-static/resources/view/xray/inbound.js:79
 #: package/htdocs/luci-static/resources/view/xray/inbound.js:98
