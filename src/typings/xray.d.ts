@@ -15,7 +15,7 @@ type Vless = {
   add: string;
   port: string;
   id: string;
-  flow: "xtls-rprx-splice" | "xtls-rprx-splice-udp443" | "xtls-rprx-direct" | "xtls-rprx-direct-udp443";
+  flow: string;
   net: "tcp" | "kcp" | "mkcp" | "ws" | "http" | "h2" | "quic" | "grpc";
   type: "none" | "http" | "srtp" | "utp" | "wechat-video";
   host: string;

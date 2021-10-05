@@ -41,7 +41,7 @@ return L.view.extend<string[]>({
       uci.set("xray", sid, "s_vless_address", address);
       uci.set("xray", sid, "s_vless_port", port);
       uci.set("xray", sid, "s_vless_user_id", vless.id || "");
-      uci.set("xray", sid, "s_vless_user_flow", vless.flow || "xtls-rprx-splice");
+      uci.set("xray", sid, "s_vless_user_flow", vless.flow || "");
       uci.set("xray", sid, "ss_security", tls);
 
       let hosts: string[] = [];
