@@ -207,6 +207,10 @@ msgstr ""
 msgid "Client Email"
 msgstr ""
 
+#: package/htdocs/luci-static/resources/view/xray/inbound.js:182
+msgid "Client Flow"
+msgstr ""
+
 #: package/htdocs/luci-static/resources/view/xray/include/custom.js:197
 msgid "Collecting data..."
 msgstr ""
@@ -325,10 +329,6 @@ msgstr ""
 
 #: package/htdocs/luci-static/resources/view/xray/dns.js:47
 msgid "Domains"
-msgstr ""
-
-#: package/htdocs/luci-static/resources/view/xray/about.js:27
-msgid "Donate: %s"
 msgstr ""
 
 #: package/htdocs/luci-static/resources/view/xray/inbound.js:304
@@ -1153,6 +1153,10 @@ msgstr ""
 
 #: package/htdocs/luci-static/resources/view/xray/inbound.js:102
 msgid "User email"
+msgstr ""
+
+#: package/htdocs/luci-static/resources/view/xray/outbound.js:102
+msgid "User Flow"
 msgstr ""
 
 #: package/htdocs/luci-static/resources/view/xray/inbound.js:79

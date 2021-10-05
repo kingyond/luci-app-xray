@@ -11,7 +11,7 @@ return L.view.extend<[string, string]>({
       let configFile = uci.get("xray", "main", "config_file");
 
       if (!configFile) {
-        configFile = "/etc/xray/config.json";
+        configFile = "/var/etc/xray/xray.main.json";
       }
 
       return Promise.all([

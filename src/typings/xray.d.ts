@@ -23,20 +23,6 @@ type Vless = {
   tls: string;
 };
 
-type Vmess = {
-  v: string;
-  ps: string;
-  add: string;
-  port: string;
-  id: string;
-  aid: string;
-  net: "tcp" | "kcp" | "mkcp" | "ws" | "http" | "h2" | "quic";
-  type: "none" | "http" | "srtp" | "utp" | "wechat-video";
-  host: string;
-  path: string;
-  tls: string;
-};
-
 interface Custom extends LuCI.baseclass {
   TextValue: form.TextValue & CustomTextValueProperties;
   RunningStatus: form.AbstractValue;

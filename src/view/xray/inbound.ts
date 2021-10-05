@@ -276,6 +276,16 @@ return L.view.extend<string[]>({
     o.modalonly = true;
     o.depends("protocol", "vless");
 
+    o = s.taboption(
+      "general",
+      form.Value,
+      "s_vless_client_flow",
+      "%s - %s".format("VLESS", _("Client Flow"))
+    );
+    o.modalonly = true;
+    o.depends("protocol", "vless");
+    o.value("xtls-rprx-direct");
+
     // Settings - VMess
     o = s.taboption(
       "general",

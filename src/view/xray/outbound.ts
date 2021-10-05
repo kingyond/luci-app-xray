@@ -28,7 +28,7 @@ return L.view.extend<string[]>({
 
       const address = vless.add || "0.0.0.0";
       const port = vless.port || "0";
-      const tls = vless.tls || "";
+      const tls = vless.tls || "tls";
 
       const network = vless.net || "";
       const headerType = vless.type || "";
@@ -41,6 +41,7 @@ return L.view.extend<string[]>({
       uci.set("xray", sid, "s_vless_address", address);
       uci.set("xray", sid, "s_vless_port", port);
       uci.set("xray", sid, "s_vless_user_id", vless.id || "");
+      uci.set("xray", sid, "s_vless_user_flow", vless.flow || "xtls-rprx-splice");
       uci.set("xray", sid, "ss_security", tls);
 
       let hosts: string[] = [];
@@ -462,6 +463,19 @@ return L.view.extend<string[]>({
     );
     o.modalonly = true;
     o.depends("protocol", "vless");
+
+    o = s.taboption(
+      "general",
+      form.Value,
+      "s_vless_user_flow",
+      "%s - %s".format("VLESS", _("User Flow"))
+    );
+    o.modalonly = true;
+    o.depends("protocol", "vless");
+    o.value("xtls-rprx-splice");
+    o.value("xtls-rprx-splice-udp443");
+    o.value("xtls-rprx-direct");
+    o.value("xtls-rprx-direct-udp443");
 
     o = s.taboption(
       "general",
