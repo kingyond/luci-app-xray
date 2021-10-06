@@ -1156,6 +1156,10 @@ msgid "User email"
 msgstr "用户邮箱地址"
 
 #: package/htdocs/luci-static/resources/view/xray/outbound.js:102
+msgid "User Encryption"
+msgstr "用户加密"
+
+#: package/htdocs/luci-static/resources/view/xray/outbound.js:102
 msgid "User Flow"
 msgstr "流控模式"
 
