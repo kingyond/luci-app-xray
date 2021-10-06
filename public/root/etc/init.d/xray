@@ -330,6 +330,7 @@ outbound_section_validate() {
 		's_vless_address:host' \
 		's_vless_port:port' \
 		's_vless_user_id:string' \
+		's_vless_user_encryption:string' \
 		's_vless_user_flow:or("xtls-rprx-splice", "xtls-rprx-splice-udp443", "xtls-rprx-direct", "xtls-rprx-direct-udp443")' \
 		's_vless_user_level:uinteger' \
 		's_vmess_address:host' \
@@ -1639,6 +1640,11 @@ add_outbound_setting() {
 			json_add_array "users"
 			json_add_object ""
 			json_add_string "id" "$s_vless_user_id"
+			if [ -n "$s_vless_user_encryption" ]; then
+				json_add_string "encryption" "$s_vless_user_encryption"
+			else
+				json_add_string "encryption" "none"
+			fi
 			json_add_string "flow" "$s_vless_user_flow"
 			if [ -n "$s_vless_user_level" ]; then
 				json_add_int "level" "$s_vless_user_level"

@@ -41,6 +41,7 @@ return L.view.extend<string[]>({
       uci.set("xray", sid, "s_vless_address", address);
       uci.set("xray", sid, "s_vless_port", port);
       uci.set("xray", sid, "s_vless_user_id", vless.id || "");
+      uci.set("xray", sid, "s_vless_user_encryption", vless.encryption || "");
       uci.set("xray", sid, "s_vless_user_flow", vless.flow || "");
       uci.set("xray", sid, "ss_security", tls);
 
@@ -463,6 +464,18 @@ return L.view.extend<string[]>({
     );
     o.modalonly = true;
     o.depends("protocol", "vless");
+    o.rmempty = false;
+
+    o = s.taboption(
+      "general",
+      form.Value,
+      "s_vless_user_encryption",
+      "%s - %s".format("VLESS", _("User Encryption"))
+    );
+    o.modalonly = true;
+    o.depends("protocol", "vless");
+    o.placeholder("none");
+    o.rmempty = false;
 
     o = s.taboption(
       "general",
@@ -476,6 +489,7 @@ return L.view.extend<string[]>({
     o.value("xtls-rprx-splice-udp443");
     o.value("xtls-rprx-direct");
     o.value("xtls-rprx-direct-udp443");
+    o.rmempty = false;
 
     o = s.taboption(
       "general",
@@ -497,6 +511,7 @@ return L.view.extend<string[]>({
     o.modalonly = true;
     o.depends("protocol", "vmess");
     o.datatype = "host";
+    o.rmempty = false;
 
     o = s.taboption(
       "general",
@@ -516,6 +531,7 @@ return L.view.extend<string[]>({
     );
     o.modalonly = true;
     o.depends("protocol", "vmess");
+    o.rmempty = false;
 
     o = s.taboption(
       "general",

@@ -1156,6 +1156,10 @@ msgid "User email"
 msgstr ""
 
 #: package/htdocs/luci-static/resources/view/xray/outbound.js:102
+msgid "User Encryption"
+msgstr ""
+
+#: package/htdocs/luci-static/resources/view/xray/outbound.js:102
 msgid "User Flow"
 msgstr ""
 
