@@ -1153,13 +1153,13 @@ add_inbound_setting() {
 				json_add_object ""
 
 				json_add_string "id" "$s_vless_client_id"
-
 				if [ -n "$s_vless_client_level" ]; then
 					json_add_int "level" "$s_vless_client_level"
 				fi
 				if [ -n "$s_vless_client_email" ]; then
 					json_add_string "email" "$s_vless_client_email"
 				fi
+				json_add_string "flow" "$s_vless_client_flow"
 
 				json_close_object
 				json_close_array # clients
@@ -1175,7 +1175,6 @@ add_inbound_setting() {
 				json_add_object ""
 
 				json_add_string "id" "$s_vmess_client_id"
-
 				if [ -n "$s_vmess_client_alter_id" ]; then
 					json_add_int "alterId" "$s_vmess_client_alter_id"
 				fi
@@ -1640,6 +1639,7 @@ add_outbound_setting() {
 			json_add_array "users"
 			json_add_object ""
 			json_add_string "id" "$s_vless_user_id"
+			json_add_string "flow" "$s_vless_user_flow"
 			if [ -n "$s_vless_user_level" ]; then
 				json_add_int "level" "$s_vless_user_level"
 			fi
