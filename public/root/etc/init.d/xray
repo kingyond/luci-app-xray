@@ -243,6 +243,7 @@ inbound_section_validate() {
 		's_vless_client_id:string' \
 		's_vless_client_level:uinteger' \
 		's_vless_client_email:string' \
+		's_vless_client_flow:or("xtls-rprx-direct")' \
 		's_vmess_client_id:string' \
 		's_vmess_client_alter_id:and(uinteger, max(65535))' \
 		's_vmess_client_email:string' \
@@ -329,6 +330,7 @@ outbound_section_validate() {
 		's_vless_address:host' \
 		's_vless_port:port' \
 		's_vless_user_id:string' \
+		's_vless_user_flow:or("xtls-rprx-splice", "xtls-rprx-splice-udp443", "xtls-rprx-direct", "xtls-rprx-direct-udp443")' \
 		's_vless_user_level:uinteger' \
 		's_vmess_address:host' \
 		's_vmess_port:port' \
