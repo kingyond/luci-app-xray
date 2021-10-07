@@ -474,11 +474,11 @@ return L.view.extend<string[]>({
     );
     o.modalonly = true;
     o.depends("protocol", "vless");
-    o.placeholder("none");
+    o.placeholder = "none";
 
     o = s.taboption(
       "general",
-      form.Value,
+      form.ListValue,
       "s_vless_user_flow",
       "%s - %s".format("VLESS", _("User Flow"))
     );
@@ -488,7 +488,6 @@ return L.view.extend<string[]>({
     o.value("xtls-rprx-splice-udp443");
     o.value("xtls-rprx-direct");
     o.value("xtls-rprx-direct-udp443");
-    o.rmempty = false;
 
     o = s.taboption(
       "general",

@@ -1181,6 +1181,14 @@ add_inbound_setting() {
 				json_close_object
 				json_close_array # clients
 			fi
+			json_add_string "decryption" "none"
+			if [-n "$s_vless_fallback_dest" ]; then
+				json_add_array "fallbacks"
+				json_add_object ""
+				json_add_int "dest" "$s_vless_fallback_dest"
+				json_close_object
+				json_close_array
+			fi
 
 			json_close_object # settings
 			;;

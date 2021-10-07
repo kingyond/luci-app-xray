@@ -278,13 +278,23 @@ return L.view.extend<string[]>({
 
     o = s.taboption(
       "general",
-      form.Value,
+      form.ListValue,
       "s_vless_client_flow",
       "%s - %s".format("VLESS", _("Client Flow"))
     );
     o.modalonly = true;
     o.depends("protocol", "vless");
     o.value("xtls-rprx-direct");
+
+    o = s.taboption(
+      "general",
+      form.Value,
+      "s_vless_fallback_dest",
+      "%s - %s".format("VLESS", _("Fallback Dest Port"))
+    );
+    o.modalonly = true;
+    o.depends("protocol", "vless");
+    o.datatype = "port";
 
     // Settings - VMess
     o = s.taboption(
