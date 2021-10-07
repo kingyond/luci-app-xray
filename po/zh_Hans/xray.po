@@ -410,6 +410,10 @@ msgid "Failed to request."
 msgstr "请求失败。"
 
 #: package/htdocs/luci-static/resources/view/xray/inbound.js:372
+msgid "Fallback Dest Port"
+msgstr "回落目标端口"
+
+#: package/htdocs/luci-static/resources/view/xray/inbound.js:372
 #: package/htdocs/luci-static/resources/view/xray/outbound.js:501
 msgid "False"
 msgstr "否"
